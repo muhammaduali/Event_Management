@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Planner</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input[type="text"],
+        input[type="datetime-local"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+        
+        input[type="text"]:focus,
+        input[type="datetime-local"]:focus,
+        textarea:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+        
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+        
+        .submit-btn:hover {
+            opacity: 1;
+        }
+        
+        .calendar {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Event Planner</h1>
+        <nav>
+            <ul>
+                <li><a href="#create-event">Create Event</a></li>
+                <li><a href="#calendar-view">Calendar View</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="create-event">
+            <h2>Create Your Event</h2>
+            <form id="event-form" class="event-form">
+                <div class="form-group">
+                    <label for="event-name">Event Name:</label>
+                    <input type="text" id="event-name" placeholder="Enter event name" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-date">Event Date & Time:</label>
+                    <input type="datetime-local" id="event-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-description">Event Description:</label>
+                    <textarea id="event-description" placeholder="Describe your event"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Create Event</button>
+            </form>
+        </section>
+        <section id="calendar-view">
+            <h2>Upcoming Events</h2>
+            <div id="calendar" class="calendar"></div>
+        </section>
+    </main>
+    <script>
+        document.getElementById('event-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const eventName = document.getElementById('event-name').value;
+            const eventDate = document.getElementById('event-date').value;
+            const eventDescription = document.getElementById('event-description').value;
+
+
+            const calendar = document.getElementById('calendar');
+            const eventEntry = document.createElement('div');
+            eventEntry.classList.add('event-entry');
+            eventEntry.textContent = `${eventName} - ${eventDate}`;
+            calendar.appendChild(eventEntry);
+
+
+            this.reset();
+
+            alert('Event created successfully!');
+        });
+
+        // This function could be enhanced further with a more dynamic calendar system
+        function renderCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '<p>No upcoming events. Create one!</p>';
+        }
+
+        renderCalendar();
+    </script>
+</body>
+
+</html>
